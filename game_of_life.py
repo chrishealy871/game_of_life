@@ -3,13 +3,13 @@ import sys
 
 import pygame
 
-from colours import red, green, black
+from colours import black, green, black
 
 def draw_grid():
     for x in range(0, width, cell_size):
-        pygame.draw.line(screen, red, (x, 0), (x, height))
+        pygame.draw.line(screen, black, (x, 0), (x, height))
     for y in range(0, height, cell_size):
-        pygame.draw.line(screen, red, (0, y), (width, y))
+        pygame.draw.line(screen, black, (0, y), (width, y))
 
 
 def draw_cells():
@@ -22,7 +22,7 @@ def draw_cells():
 def get_neighbours((x, y)):
     positions = [(x - 1, y - 1), (x, y - 1), (x + 1, y - 1), (x + 1, y),
                  (x +1,  y + 1), (x, y + 1), (x - 1, y + 1), (x - 1, y)]
-    return [cells[r, c] for (r, c) in positions if 0 <= r < rows and 0 <= c < columns]
+    return [cells[c, r] for (c, r) in positions if 0 <= r < rows and 0 <= c < columns]
 
 def evolve():
     global cells
@@ -44,7 +44,7 @@ def get_cells(density=0.6):
 
 pygame.init()
 
-columns, rows = 50, 50
+columns, rows = 100, 100
 cells = get_cells()
 
 cell_size = 10
